@@ -125,7 +125,7 @@ function powerexit() {
 export default function Sidebar() {
   const anchor = Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT;
   let batteryPercInt: number = Battery.get_default().percentage * 100;
-  let batteryPercS: string = "󰁹 " + batteryPercInt.toString();
+  let batteryPercS: string = "󰁹 " + batteryPercInt.toFixed(0);
 
   return (
     <window
@@ -140,14 +140,10 @@ export default function Sidebar() {
       }}
     >
       <box className="sidebar" vertical>
-        <centerbox horizontal css="min-width:350px;">
-          <label vexpand label=""></label>
-          <box>
-            <button className="btnbar"></button>
-            <button className="btnbar"></button>
-            <button className="btnbar"></button>
-          </box>
-          <label vexpand label=""></label>
+        <centerbox horizontal css="min-width:350px; gap-between: 4px">
+            <button className="btnbar">nigga</button>
+            <button css="min-width:120px; border-radius: 3px;" className="btnbar">nigrogarca</button>
+            <button className="btnbar">bitch</button>
         </centerbox>
         <box css="padding-bottom:20px;"></box>
         <box className="group" halign="left" vertical>
@@ -160,11 +156,13 @@ export default function Sidebar() {
             ></label>
             <AudioSlider />
           </box>
-          <label
-            css="padding-bottom:10px; margin-right:350px"
-            label="󰃠 Brightness"
-          ></label>
-          <BrightnessSlider />
+          <box>
+            <label
+              css="padding-bottom:10px; padding-right:8px; font-size:20px;"
+              label="󰃠 "
+            />
+            <BrightnessSlider />
+          </box>
         </box>
         {/* <box css="padding-bottom:20px;"></box> */}
         {/* <box className="group" halign="left" vertical>
@@ -187,6 +185,8 @@ export default function Sidebar() {
         {/* <circularprogress value={1} startAt={0.75} endAt={0.75}>
           <icon />
         </circularprogress> */}
+        {/* <icon css="font-size: 16px;" icon={GLib.get_os_info("LOGO") || "missing-symbolic"} /> */}
+        {/* <levelbar value={0.6}/> */}
       </box>
     </window>
   );
