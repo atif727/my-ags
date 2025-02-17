@@ -35,19 +35,19 @@ function AudioSlider() {
   );
 }
 
-function MicrophoneSlider() {
-  const microphone = Wp.get_default()?.audio.defaultMicrophone!;
+// function MicrophoneSlider() {
+//   const microphone = Wp.get_default()?.audio.defaultMicrophone!;
 
-  return (
-    <box className="AudioSlider" css="min-width: 140px">
-      <slider
-        hexpand
-        onDragged={({ value }) => (microphone.volume = value)}
-        value={bind(microphone, "volume")}
-      />
-    </box>
-  );
-}
+//   return (
+//     <box className="AudioSlider" css="min-width: 140px">
+//       <slider
+//         hexpand
+//         onDragged={({ value }) => (microphone.volume = value)}
+//         value={bind(microphone, "volume")}
+//       />
+//     </box>
+//   );
+// }
 
 function BatteryUi() {
   const batteryPerc: number = Battery.get_default().percentage * 100;
@@ -151,9 +151,19 @@ export default function Sidebar() {
         </centerbox>
         <box css="padding-bottom:20px;"></box>
         <box className="group" halign="left" vertical>
-          <label css="padding-bottom:10px; " label="Speaker"></label>
-          <AudioSlider />
-          <label css="padding-bottom:10px" label="Brightness"></label>
+          {/* <label css="padding-bottom:10px; margin-right:350px" label="󰕾 Speaker"></label>
+          <AudioSlider /> */}
+          <box>
+            <label
+              css="padding-bottom:10px; padding-right:8px; font-size:20px;"
+              label="󰕾 "
+            ></label>
+            <AudioSlider />
+          </box>
+          <label
+            css="padding-bottom:10px; margin-right:350px"
+            label="󰃠 Brightness"
+          ></label>
           <BrightnessSlider />
         </box>
         {/* <box css="padding-bottom:20px;"></box> */}
@@ -164,15 +174,19 @@ export default function Sidebar() {
         <centerbox horizontal>
           <label vexpand label=""></label>
           <box>
-            <label css="padding-left:10px;" label={batteryPercS}></label>
+            <label css="" label={batteryPercS}></label>
             <button
-              css="margin-left:200px;"
+              css="margin-left:350px;"
               onClicked={powerexit}
               className="btnbar last exit"
             ></button>
           </box>
           <label vexpand label=""></label>
         </centerbox>
+        {/* the next lines are for hardware information piechart shit */}
+        {/* <circularprogress value={1} startAt={0.75} endAt={0.75}>
+          <icon />
+        </circularprogress> */}
       </box>
     </window>
   );
