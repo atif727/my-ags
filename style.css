@@ -1,10 +1,10 @@
-@import url('../../.cache/wal/colors-waybar.css');
+@import url("../../.cache/wal/colors-waybar.css");
 
 * {
-    all:unset;
-    font-size: 14px;
-    font-family: "Fira Sans", sans-serif;
-    font-weight: normal;
+  all: unset;
+  font-size: 14px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: normal;
 }
 
 /* .calendar {
@@ -20,29 +20,28 @@
 } */
 
 .sidebar {
-    background: #1f001e;
-    padding: 12px;
-    margin:14px;
-    border-radius: 12px;
-    font-weight: bold;
-    border: 3px solid @color11;
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.8);
-    /* padding:20px; */
+  background: #1f001e;
+  padding: 12px;
+  margin: 14px;
+  border-radius: 12px;
+  font-weight: bold;
+  border: 3px solid @color11;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.8);
+  /* padding:20px; */
 }
 
 .group {
-    padding:16px;
-    background-color: #000000;
-    border-radius: 10px;
+  padding: 16px;
+  background-color: #000000;
+  border-radius: 10px;
 }
 
 .btnbar {
-    min-height:36px;
-    border-radius: 50%;
-    min-width: 36px;
-    /* margin:0px 4px 0px 4px; */
-    background-color:@color11;
-    font-weight:bold;
+  min-height: 50px;
+  min-width: 120px;
+  margin-right: 5px;
+  border-radius: 10px;
+  background-color: @color11;
 }
 /* .btnbar.lock {
     background:url("assets/icons/padlock2-symbolic.svg");
@@ -71,62 +70,64 @@
     background-position:center;
     background-color: @color11;    
 } */
-
+.btnbar.lock:hover {
+  background-color: @color15;
+  color: black;
+}
 .exit {
-    background:url("assets/icons/turn-off-symbolic.svg");
-    background-repeat:no-repeat;
-    background-position:center;
-    background-color: @color11;    
-    min-height:36px;
-    border-radius: 50%;
-    min-width: 36px;
-    font-weight:bold;
+  background: url("assets/icons/turn-off-symbolic.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: @color11;
+  min-height: 36px;
+  border-radius: 50%;
+  min-width: 36px;
+  font-weight: bold;
 }
 
-
 .AudioSlider {
-    background-color:@color11;
-    border-radius:12px;
-    margin-bottom:10px;
+  background-color: @color11;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 
 .AudioSlider contents {
-    min-height: 20px;
-    background-color:@color15;
-    border-radius:12px;
+  min-height: 20px;
+  background-color: @color15;
+  border-radius: 12px;
 }
 
 .AudioSlider value {
-    min-height: 10px;
-    background-color: #222222;
+  min-height: 10px;
+  background-color: #222222;
 }
 
 .AudioSlider slider {
-    min-height: 16px;
-    min-width: 16px;
-    background-color:@color11;
-    border-radius:12px;
-    border: 2px solid #ffffff;
+  min-height: 16px;
+  min-width: 16px;
+  background-color: @color11;
+  border-radius: 12px;
+  border: 2px solid #ffffff;
 }
 
 .AudioSlider highlight {
-    min-height:10px;
-    background-color:@color11;
-    border-radius:12px;
-    outline-width:3px;
+  min-height: 10px;
+  background-color: @color11;
+  border-radius: 12px;
+  outline-width: 3px;
 }
 
 .AudioSlider fill {
-    min-height:10px;
-    background-color:@color11;
-    border-radius:12px;
-    padding: 5px;
+  min-height: 10px;
+  background-color: @color11;
+  border-radius: 12px;
+  padding: 5px;
 }
 
 circularprogress {
-    color: green;
-    background-color: black;
-    font-size: 6px;
-    margin: 2px;
-    min-width: 32px;
+  color: green;
+  background-color: black;
+  font-size: 6px;
+  margin: 2px;
+  min-width: 32px;
 }

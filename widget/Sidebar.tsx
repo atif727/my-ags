@@ -140,10 +140,12 @@ export default function Sidebar() {
       }}
     >
       <box className="sidebar" vertical>
-        <centerbox horizontal css="min-width:350px; gap-between: 4px">
-            <button className="btnbar">nigga</button>
-            <button css="min-width:120px; border-radius: 3px;" className="btnbar">nigrogarca</button>
-            <button className="btnbar">bitch</button>
+        <centerbox css="min-width:360px;">
+          <button className="btnbar wifi">bitch</button>
+          <button className="btnbar bluetooth">bitch</button>
+          <button css="font-size:100px;" className="btnbar lock">
+            󰌾
+          </button>
         </centerbox>
         <box css="padding-bottom:20px;"></box>
         <box className="group" halign="left" vertical>
@@ -172,11 +174,11 @@ export default function Sidebar() {
         <centerbox horizontal>
           <label vexpand label=""></label>
           <box>
-            <label css="" label={batteryPercS}></label>
+            <label css="margin-left: 5px" label={batteryPercS}></label>
             <button
               css="margin-left:350px;"
               onClicked={powerexit}
-              className="btnbar last exit"
+              className="last exit"
             ></button>
           </box>
           <label vexpand label=""></label>
