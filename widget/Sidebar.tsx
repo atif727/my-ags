@@ -6,6 +6,9 @@ import { subprocess, exec, execAsync } from "astal/process";
 import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Brightness from "./Brightness";
 import Battery from "gi://AstalBattery";
+import Network from "gi://AstalNetwork";
+
+const network = Network.get_default();
 
 function BrightnessSlider() {
   const brightness = Brightness.get_default();
@@ -141,9 +144,18 @@ export default function Sidebar() {
     >
       <box className="sidebar" vertical>
         <centerbox css="min-width:360px;">
-          <button className="btnbar wifi">bitch</button>
+          <button className="btnbar wifi">
+            <centerbox css="padding-left:18px;" horizontal>
+              {network.wifi.ssid ? ` ` : "󰤮"}
+              {network.wifi.ssid || "Disconnected"}
+            </centerbox>
+          </button>
           <button className="btnbar bluetooth">bitch</button>
-          <button css="font-size:100px;" className="btnbar lock">
+          <button
+            css="font-size:100px;"
+            className="btnbar lock"
+            onClicked={powerlock}
+          >
             󰌾
           </button>
         </centerbox>

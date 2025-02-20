@@ -20,6 +20,7 @@
 } */
 
 .sidebar {
+  /* text-align: center; */
   background: #1f001e;
   padding: 12px;
   margin: 14px;
@@ -42,6 +43,8 @@
   margin-right: 5px;
   border-radius: 10px;
   background-color: @color11;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 /* .btnbar.lock {
     background:url("assets/icons/padlock2-symbolic.svg");
@@ -73,6 +76,8 @@
 .btnbar.lock:hover {
   background-color: @color15;
   color: black;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .exit {
   background: url("assets/icons/turn-off-symbolic.svg");
