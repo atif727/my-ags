@@ -162,7 +162,6 @@ export default function Sidebar() {
       }}
     >
       <box className="sidebar" vertical>
-        
         <centerbox css="min-width:360px;">
           <button onClicked={openWifi} className="btnbar wifi-active">
             {network.wifi.ssid ? `  ${network.wifi.ssid}` : "󰤮  Disconnected"}
@@ -216,11 +215,10 @@ export default function Sidebar() {
           <label vexpand label=""></label>
         </centerbox>
         {/* the next lines are for hardware information piechart shit */}
-        {/* <circularprogress value={1} startAt={0.75} endAt={0.75}>
-          <icon />
+        {/* // TODO : matha noshto koira labh nai astal ekta bokachoda */}
+        {/* <circularprogress value={1} startAt={1} endAt={1}>
+          damn wtf
         </circularprogress> */}
-        {/* <icon css="font-size: 16px;" icon={GLib.get_os_info("LOGO") || "missing-symbolic"} /> */}
-        {/* <levelbar value={0.6}/> */}
       </box>
     </window>
   );
