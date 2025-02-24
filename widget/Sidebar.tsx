@@ -8,6 +8,104 @@ import Brightness from "./Brightness";
 import Battery from "gi://AstalBattery";
 import Network from "gi://AstalNetwork";
 import Bluetooth from "gi://AstalBluetooth";
+import Mpris from "gi://AstalMpris";
+
+// taking length
+function lengthStr(length: number) {
+  const min = Math.floor(length / 60);
+  const sec = Math.floor(length % 60);
+  const sec0 = sec < 10 ? "0" : "";
+  return `${min}:${sec0}${sec}`;
+}
+
+// used mrpis
+function MediaPlayer({ player }: { player: Mpris.Player }) {
+  const { START, END } = Gtk.Align;
+
+  const title = bind(player, "title").as((t) => t || "Unknown Track");
+
+  const artist = bind(player, "artist").as((a) => a || "Unknown Artist");
+
+  const coverArt = bind(player, "coverArt").as(
+    (c) => `background-image: url('${c}')`
+  );
+
+  const validateEntry = (entry: string | null | undefined) => {
+    return entry && Astal.Icon.lookup_icon(entry)
+      ? entry
+      : "audio-x-generic-symbolic";
+  };
+
+  const playerIcon = bind(player, "entry").as(validateEntry);
+
+  const position = bind(player, "position").as((p) =>
+    player.length > 0 ? p / player.length : 0
+  );
+
+  const playIcon = bind(player, "playbackStatus").as((s) =>
+    s === Mpris.PlaybackStatus.PLAYING
+      ? "media-playback-pause-symbolic"
+      : "media-playback-start-symbolic"
+  );
+
+  return (
+    <box className="MediaPlayer">
+      <box className="cover-art" css={coverArt} />
+      <box className="hi" vertical>
+        <box className="title">
+          <label truncate hexpand halign={START} label={title} />
+          <icon icon={playerIcon} />
+        </box>
+        <label halign={START} valign={START} vexpand wrap label={artist} />
+        <slider
+          visible={bind(player, "length").as((l) => l > 0)}
+          onDragged={({ value }) => (player.position = value * player.length)}
+          value={position}
+        />
+        <centerbox className="actions">
+          <label
+            hexpand
+            className="position"
+            halign={START}
+            visible={bind(player, "length").as((l) => l > 0)}
+            label={bind(player, "position").as(lengthStr)}
+          />
+          <box>
+            <button
+              css={"padding-right: 15px"}
+              onClicked={() => player.previous()}
+              visible={bind(player, "canGoPrevious")}
+            >
+              <icon icon="media-skip-backward-symbolic" />
+            </button>
+            <button
+              onClicked={() => player.play_pause()}
+              visible={bind(player, "canControl")}
+            >
+              <icon icon={playIcon} />
+            </button>
+            <button
+              css={"padding-left: 15px"}
+              onClicked={() => player.next()}
+              visible={bind(player, "canGoNext")}
+            >
+              <icon icon="media-skip-forward-symbolic" />
+            </button>
+          </box>
+          <label
+            hexpand
+            className="length"
+            halign={END}
+            visible={bind(player, "length").as((l) => l > 0)}
+            label={bind(player, "length").as((l) =>
+              l > 0 ? lengthStr(l) : "0:00"
+            )}
+          />
+        </centerbox>
+      </box>
+    </box>
+  );
+}
 
 const network = Network.get_default();
 
@@ -137,6 +235,7 @@ function openWifi() {
 }
 
 export default function Sidebar() {
+  const mpris = Mpris.get_default();
   const anchor = Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT;
   let batteryPercInt: number = Battery.get_default().percentage * 100;
   let batteryPercS: string = "󰁹 " + batteryPercInt.toFixed(0);
@@ -178,7 +277,7 @@ export default function Sidebar() {
             󰌾
           </button>
         </centerbox>
-        <box css="padding-bottom:20px;"></box>
+        <box css="padding-bottom:15px;"></box>
         <box className="group" halign="left" vertical>
           {/* <label css="padding-bottom:10px; margin-right:350px" label="󰕾 Speaker"></label>
           <AudioSlider /> */}
@@ -201,7 +300,25 @@ export default function Sidebar() {
         {/* <box className="group" halign="left" vertical>
           
         </box> */}
+        {/* the next lines are for hardware information piechart shit */}
+        {/* // TODO : matha noshto koira labh nai astal ekta bokachoda */}
+        {/* <circularprogress value={1} startAt={1} endAt={1}>
+          damn wtf
+        </circularprogress> */}
         <box css="padding-bottom:15px;"></box>
+        {/* //* media player of mine woohoo  */}
+        {bind(mpris, "players").as((arr) => {
+          const lastPlayer = arr[arr.length - 2]; // Get the last index of the array (you will get alot of players, the last one has all the metadata of the current playing song)
+          if (lastPlayer === undefined) {
+            return <></>;
+          } else {
+            return (
+              <box css={"margin-bottom: 20px"} halign="left" vertical>
+                <MediaPlayer player={lastPlayer} />
+              </box>
+            );
+          }
+        })}
         <centerbox horizontal>
           <label vexpand label=""></label>
           <box>
@@ -214,11 +331,6 @@ export default function Sidebar() {
           </box>
           <label vexpand label=""></label>
         </centerbox>
-        {/* the next lines are for hardware information piechart shit */}
-        {/* // TODO : matha noshto koira labh nai astal ekta bokachoda */}
-        {/* <circularprogress value={1} startAt={1} endAt={1}>
-          damn wtf
-        </circularprogress> */}
       </box>
     </window>
   );
