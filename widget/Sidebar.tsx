@@ -7,6 +7,7 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Brightness from "./Brightness";
 import Battery from "gi://AstalBattery";
 import Network from "gi://AstalNetwork";
+import Bluetooth from "gi://AstalBluetooth";
 
 const network = Network.get_default();
 
@@ -140,6 +141,14 @@ export default function Sidebar() {
   let batteryPercInt: number = Battery.get_default().percentage * 100;
   let batteryPercS: string = "󰁹 " + batteryPercInt.toFixed(0);
 
+  const bluetooth = Bluetooth.get_default();
+  const bluestate = bluetooth.get_is_powered();
+
+  function openbluetooth() {
+    const proc = subprocess(["bash", "-c", "blueman-manager"]);
+    App.get_window("sidebar")!.hide();
+  }
+
   return (
     <window
       name="sidebar"
@@ -153,14 +162,18 @@ export default function Sidebar() {
       }}
     >
       <box className="sidebar" vertical>
+        
         <centerbox css="min-width:360px;">
-          <button onClicked={openWifi} className="btnbar wifi">
-            {`  ${network.wifi.ssid}` || "󰤮 Disconnected"}
+          <button onClicked={openWifi} className="btnbar wifi-active">
+            {network.wifi.ssid ? `  ${network.wifi.ssid}` : "󰤮  Disconnected"}
           </button>
-          <button className="btnbar bluetooth">afsdfjhfkjasfhksjfhdkf</button>
+          {/* // TODO: add a way to persist the on and off section being dynamic */}
+          <button onClicked={openbluetooth} className="btnbar bluetooth">
+            {bluestate ? " Bluetooth On" : "󰂲 bluetooth nai"}
+          </button>
           <button
             css="font-size:100px;"
-            className="btnbar lock"
+            className="btnbar"
             onClicked={powerlock}
           >
             󰌾

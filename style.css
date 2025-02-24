@@ -73,7 +73,7 @@
     background-position:center;
     background-color: @color11;    
 } */
-.btnbar.lock:hover {
+.btnbar:hover {
   background-color: @color15;
   color: black;
   background-repeat: no-repeat;
