@@ -43,8 +43,8 @@
   margin-right: 5px;
   border-radius: 10px;
   background-color: @color11;
-  background-repeat: no-repeat;
-  background-position: center;
+  /* background-repeat: no-repeat;
+  background-position: center; */
 }
 /* .btnbar.lock {
     background:url("assets/icons/padlock2-symbolic.svg");

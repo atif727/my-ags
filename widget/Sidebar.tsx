@@ -125,6 +125,16 @@ function powerexit() {
   App.get_window("sidebar")!.hide();
 }
 
+function openWifi() {
+  const proc = subprocess([
+    "bash",
+    "-c",
+    "~/.config/ml4w/settings/networkmanager.sh",
+    // "literally nmtui",
+  ]);
+  App.get_window("sidebar")!.hide();
+}
+
 export default function Sidebar() {
   const anchor = Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT;
   let batteryPercInt: number = Battery.get_default().percentage * 100;
@@ -144,13 +154,10 @@ export default function Sidebar() {
     >
       <box className="sidebar" vertical>
         <centerbox css="min-width:360px;">
-          <button className="btnbar wifi">
-            <centerbox css="padding-left:18px;" horizontal>
-              {network.wifi.ssid ? ` ` : "󰤮"}
-              {network.wifi.ssid || "Disconnected"}
-            </centerbox>
+          <button onClicked={openWifi} className="btnbar wifi">
+            {`  ${network.wifi.ssid}` || "󰤮 Disconnected"}
           </button>
-          <button className="btnbar bluetooth">bitch</button>
+          <button className="btnbar bluetooth">afsdfjhfkjasfhksjfhdkf</button>
           <button
             css="font-size:100px;"
             className="btnbar lock"
